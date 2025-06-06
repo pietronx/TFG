@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My E-Rest</title>
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href=" imgs/favicon.png" style="color: white;">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Css  -->
+    <link rel="stylesheet" href="css/estilos.css" />
+    <!-- Font  -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+
+<body style="background-color: #212529">
+    <!-- ==================== Navbar ==================== -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #0f1113;">
+        <div class="container-fluid">
+            <!-- Contenedor FLEX para logo + texto -->
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <img src=" imgs/icononavbar.png" class="navbar-logo img-fluid mt-1" alt="logo">
+                <a id=nombre class="navbar-brand m-0" href="#portada">My E-Rest</a>
+            </div>
+            <!-- Botón hamburguesa para mostrar/ocultar menú en pantallas pequeñas -->
+            <button class="navbar-toggler ms-auto pe-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menú de navegación desplegable -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item text-white w-100">
+                        <div class="d-flex flex-wrap align-items-center gap-2">
+                            <!-- Pax -->
+                            <label for="pax" class="mb-0">Pax:</label>
+                            <input type="number" id="pax" min="1" value="1"
+                                class="form-control form-control-sm border-secondary" style="width: 80px;"
+                                onchange="actualizarPrecio()" />
+                            <!-- Mesa -->
+                            <label for="mesa" class="mb-0">Mesa:</label>
+                            <select id="mesa" class="form-select form-select-sm" style="width: auto;"
+                                onchange="bloquearSiEsPrimeraVez()" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Avise al personal para modificarla.">
+                                <option value="" disabled selected>Selecciona</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <!-- Botones en la misma línea -->
+                            <div class="d-flex gap-2">
+                                <button onclick="solicitarCodigoMesa()" class="btn btn-cambiar btn-sm">
+                                    Cambiar
+                                </button>
+                                <button onclick="aceptarMesaYPax()" class="btn btn-aceptar btn-sm">
+                                    Aceptar
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Enlaces de navegación -->
+                    <li class="nav-item"><a class="nav-link" href="#primeros">Primero</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#segundos">Segundos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#postres">Postres</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bebidas">Bebidas</a></li>
+                    <!-- Enlace del carrito -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="offcanvas"
+                            data-bs-target="#carritoOffcanvas">Pedido</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- ScrollSpy -->
+    <div data-bs-spy="scroll" data-bs-target="#navbar" data-bs-smooth-scroll="true" class="scrollspy-page" tabindex="0">
+
+        <!-- ==================== Portada ==================== -->
+        <section id="portada" class="d-flex flex-column justify-content-center align-items-center text-center"
+            style="position: relative;">
+            <img src=" imgs/portadaRealista2.png" class="img-fluid portada-principal" alt="portada">
+            <div class="texto-portada">
+                <h1 class="fw">My E-Rest</h1>
+                <p>La mejor fusión de sabores de <br>España y Venezuela</p>
+            </div>
+        </section>
+
+        <!-- Secciones de Platos -->
+        <!-- ==================== Primeros ====================  -->
+        <section id="primeros" class="py-5 px-4 position-relative" style="background-color: #0b0e13;">
+            <div class="container">
+                <div class="section-title mb-5 mt-1">Primeros</div>
+                <div class="row gy-4">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #11141d; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/tortilla.jpg" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold;">Tortilla de patatas</h5>
+                                <div class="d-flex justify-content-center gap-2 botones-plato">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Tortilla de patatas')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Tortilla de patatas')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #11141d; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/patatasbravas.png" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold;">Patatas Bravas Mixtas</h5>
+                                <div class="d-flex justify-content-center gap-2 botones-plato">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Patatas Bravas Mixtas')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Patatas Bravas Mixtas')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #11141d; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/pimientosrellenos.jpg" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold;">Pimientos Rellenos de Carne</h5>
+                                <div class="d-flex justify-content-center gap-2 botones-plato">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Pimientos Rellenos de Carne')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Pimientos Rellenos de Carne')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== Segundos ==================== -->
+        <section id="segundos" class="py-5 px-4 position-relative" style="background-color: #0d1016;">
+            <div class="container">
+                <div class="section-title mb-5 mt-1">Segundos</div>
+                <div class="row gy-4">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #11141d; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/pabellon.png" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold;">Pabellón Venezolano</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Pabellón Venezolano')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Pabellón Venezolano')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #11141d; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/lomocerdo.jpg" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Lomo de Cerdo y Puré de Patata</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Lomo de Cerdo y Puré de Patata')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Lomo de Cerdo y Puré de Patata')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #11141d; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/estofado.jpg" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Estofado de Ternera</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Estofado de Ternera')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Estofado de Ternera')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== Postres ====================  -->
+        <section id="postres" class="py-5 px-4 position-relative" style="background-color: #0f121a; ">
+            <div class="container">
+                <div class="section-title mb-5 mt-1">Postres</div>
+                <div class="row gy-4">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #0b0e13; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/quesillo.png" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Quesillo Venezolano</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Quesillo Venezolano')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Quesillo Venezolano')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #0b0e13; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/tartasantiago.jpg" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Tarta de Santiago</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Tarta de Santiago')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Tarta de Santiago')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #0b0e13; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/flan.png" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Flan de Almendras y Panela</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Flan de Almendras y Panela')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Flan de Almendras y Panela')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== Bebidas ==================== -->
+        <section id="bebidas" class="py-5 px-4 position-relative" style="background-color: #11141d;">
+            <div class="container">
+                <div class="section-title mb-5 mt-1">Bebidas</div>
+                <div class="row gy-4">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #0b0e13; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/agua.png" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Agua</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir" onclick="anadirPlato('Agua')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Agua')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #0b0e13; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/sangria.jpg" class="card-img-top" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Sangria</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir" onclick="anadirPlato('Sangria')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Sangria')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card mb-4" style="background-color: #0b0e13; border: 1px solid rgb(114, 112, 112);">
+                            <img src=" imgs/cerveza.png" class="card-img-top"
+                                style="object-fit: contain; object-position: center;" />
+                            <div class="card-body text-center" style="border-top: 1px solid rgb(114, 112, 112)">
+                                <h5 class="card-title" style="font-weight: bold; ">Cerveza Venezolana Polar</h5>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-anadir"
+                                        onclick="anadirPlato('Cerveza Polar')">Añadir</button>
+                                    <button class="btn btn-personalizar"
+                                        onclick="personalizarPlato('Cerveza Polar')">Personalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Pedido Final -->
+        <section id="pedido" class="py-5 px-4" style="background-color: rgb(12, 12, 12)">
+            <div class="container-lg d-flex justify-content-center">
+                <div class="py-4 px-5 rounded text-center" style="background-color: #17191b; width: auto;">
+
+                    <h4 class="mb-4" style="color: #d8d4c7;">¿Haz finalizado tu pedido?</h4>
+
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-editar px-4 py-2" data-bs-toggle="offcanvas"
+                            data-bs-target="#carritoOffcanvas">
+                            Ver Pedido
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Offcanvas del carrito -->
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="carritoOffcanvas">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Tu Pedido</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column p-0 h-100">
+                <!-- Contenido con scroll -->
+                <div id="contenido-carrito" class="flex-grow-1 overflow-auto p-3">
+                </div>
+                <div class="p-3 border-top">
+                    <div id="precio-total" class="text-end fw-bold mb-2" style="font-size: 1.1rem;">
+                        Total: 20 €
+                    </div>
+                    <button class="btn btn-success w-100 fw-bold" onclick="finalizarPedido()">Finalizar Pedido</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- ===== PERSONALIZAR PEDIDO ===== -->
+        <!-- Modal de Personalización -->
+        <div class="modal fade" id="modalPersonalizar" tabindex="-1" aria-labelledby="modalPersonalizarLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPersonalizarLabel">Personalizar Plato</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formIngredientes" class="d-flex flex-column gap-3">
+                            <!-- Ingredientes con controles serán insertados aquí desde JS -->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary"
+                            onclick="guardarPersonalizacion()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mensaje de plato añadido -->
+        <div id="mensajeToast"
+            class="toast w-auto p-1 align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-4"
+            role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 1055; display: none;">
+
+            <div class="d-flex">
+                <div class="toast-body">
+                    Plato añadido correctamente
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" onclick="ocultarToast()"></button>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="mt-3" style="background-color: #0f1113;">
+            <div class="container d-flex justify-content-center align-items-center py-4 gap-3 flex-wrap">
+                <img src=" imgs/myerest.png" alt="Logo My E-Rest" class="footer-logo">
+                <p class="text-white mb-0 ms-3 text-center">My E-Rest &copy; 2025. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+        <!-- Script  -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+</body>
+
+</html>

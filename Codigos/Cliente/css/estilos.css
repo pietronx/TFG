@@ -1,0 +1,287 @@
+/* Efecto scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* navbar */
+.nav-link.active {
+    color: white;
+    font-weight: bold;
+}
+.navbar-logo {
+    width: 50px;
+    height: auto;
+    margin-right: 20px;
+    filter: invert(1);
+}
+
+#mesa,#pax {
+    background-color: #0f1113;
+    color: white;
+    border: 1px solid #444;
+}
+
+#nombre {
+    font-family: 'Playfair Display', serif;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav .nav-item.text-white {
+    width: 100%;
+  }
+    .navbar {
+    padding-right: 2rem; /* asegura espacio en el borde */
+  }
+
+  #pax, #mesa {
+    max-width: 100px;
+    width: 100% !important;
+  }
+
+  .btn-cambiar,
+  .btn-aceptar {
+    width: auto;
+  }
+
+  .navbar-toggler {
+    margin-right: 0;
+  }
+}
+
+
+
+/* ===== PORTADA ===== */
+
+/* Imagen de portada ocupa todo el ancho */
+#portada {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
+}
+
+.portada-principal {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+    display: block;
+}
+
+/* Caja de texto encima de la imagen */
+.texto-portada {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    z-index: 2;
+}
+
+.texto-portada h1.fw {
+    white-space: nowrap;       
+    font-size: 8vw;             
+    font-family: 'Playfair Display', serif;
+}
+
+.texto-portada p {
+    font-size: 1.5rem;
+}
+
+/* RESPONSIVE SOLO PARA MÓVILES */
+@media (max-width: 768px) {
+    #portada {
+        height: auto;
+        position: relative; 
+    }
+
+    .portada-principal {
+        object-fit: contain; /* no recorta */
+        height: auto;
+    }
+
+    .texto-portada h1 {
+        font-size: clamp(1.8rem, 7vw, 2.8rem); /* Se adapta al ancho del dispositivo */
+        white-space: nowrap;
+        margin-bottom: 0.5rem;
+    }
+
+    .texto-portada p {
+        font-size: clamp(0.9rem, 4vw, 1.2rem); /* Escala entre móvil y tablet */
+        margin: 0;
+    }
+
+    .texto-portada {
+        position: absolute;
+        bottom: 15%; /* Subimos un poco para mayor visibilidad */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        text-align: center;
+        padding: 0 10px;
+    }
+}
+
+
+/* ===== Secciones de Comida ===== */
+/* Títulos de secciones */
+.section-title {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    color: #d8d4c7;
+    
+}
+
+/*Titulo de las cards*/
+.card-title {
+    color: #d8d4c7;
+}
+
+/* Imágenes de las cards */
+.card img {
+    height: 400px;
+    width: auto;
+    object-fit: cover;
+    background-color: rgb(7, 7, 7);
+}
+/* Tamaño de las cards */
+.card {
+  height: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-title {
+  min-height: 3.5rem; /* ajusta según lo que ocupe tu título más largo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* botones alineado */
+.row > [class^="col-"] {
+  display: flex;
+}
+
+.botones-plato .btn {
+  width: 120px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Botón Añadir (por defecto) */
+.btn-success {
+    width: 120px;
+    font-weight: bold;
+}
+
+/* Botón Personalizar (por defecto) */
+.btn-warning {
+    width: 120px;
+    font-weight: bold;
+}
+
+/* Contenedor de los botones de cada plato */
+.botones-plato {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Botones Finalizar y Editar Pedido */
+.text-center button {
+    width: 160px;
+    font-weight: bold;
+}
+
+/* logo */
+.footer-logo {
+    width: 70px;
+}
+
+
+/* Footer Logo */
+.footer-logo {
+    width: 70px;
+    height: auto;
+}
+
+/* Responsive - logo más pequeño en móvil */
+@media (max-width: 768px) {
+    .footer-logo {
+        width: 50px;
+    }
+}
+
+/* === BOTONES === */
+
+/* Botón Añadir */
+.btn-anadir {
+    background-color: #212f3c;
+    color: #d8d4c7;
+    border: none;
+    width: 120px;
+    font-weight: bold;
+}
+.btn-anadir:hover {
+    background-color: #0c381f;
+    color: white;
+    
+}
+
+/* Botón Personalizar */
+.btn-personalizar {
+    background-color: #212f3c;
+    color: #d8d4c7;
+    border: none;
+    width: 120px;
+    font-weight: bold;
+}
+.btn-personalizar:hover {
+    background-color: #c79e3e;
+      
+}
+
+
+/* Botón Ver Pedido */
+.btn-editar {
+    background-color: #801513;
+    color: #d8d4c7;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;  
+}
+
+.btn-editar:hover {
+    background-color: #882424;
+    color: white;
+}
+
+.btn-editar:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+    background-color: #882424;
+    color: white;
+}
+
+
+/* Botón Cambiar Mesa */
+.btn-cambiar, .btn-aceptar {
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #e0e0e0;
+    font-weight: bold;
+}
+.btn-cambiar:hover, .btn-aceptar:hover{
+    background-color: #e0e0e0;
+    color: black;
+    box-shadow: 0 0 10px rgba(224, 224, 224, 0.3);
+}
