@@ -1,0 +1,168 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "cr82b_sharedsharepointonline_ef48d"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Cuando_se_crea_o_se_modifica_un_archivo_(solo_propiedades)": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://educa2madrid.sharepoint.com/sites/MyERest",
+              "table": "9da66b23-10b9-4db2-acc1-86f93c42eb83",
+              "folderPath": "/Documentos compartidos/Comandas"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "GetOnUpdatedFileItems",
+              "connectionName": "shared_sharepointonline"
+            }
+          },
+          "recurrence": {
+            "frequency": "Minute",
+            "interval": 15
+          },
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "metadata": {
+            "operationMetadataId": "6f66b471-0c75-44fb-925a-12625cf84f13"
+          }
+        }
+      },
+      "actions": {
+        "Obtener_contenido_de_archivo": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://educa2madrid.sharepoint.com/sites/MyERest",
+              "id": "%252fDocumentos%2bcompartidos%252fComandas%252fcomandas.txt",
+              "inferContentType": true
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "GetFileContent",
+              "connectionName": "shared_sharepointonline"
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "1774a2e8-5d4f-45ec-b8dc-ee3d9e67f2f5",
+            "%252fDocumentos%2bcompartidos%252fComandas%252fcomandas.json": "/Documentos compartidos/Comandas/comandas.json",
+            "%252fDocumentos%2bcompartidos%252fComandas%252fcomandas.txt": "/Documentos compartidos/Comandas/comandas.txt"
+          }
+        },
+        "Análisis_del_archivo_JSON": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@body('Obtener_contenido_de_archivo')",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_pedido": {
+                    "type": "integer"
+                  },
+                  "id_mesa": {
+                    "type": "integer"
+                  },
+                  "hora_pedido": {
+                    "type": "string"
+                  },
+                  "estado_pedido": {
+                    "type": "string"
+                  },
+                  "tipo_plato": {
+                    "type": "string"
+                  },
+                  "nombre_plato": {
+                    "type": "string"
+                  },
+                  "modificaciones": {
+                    "type": "string"
+                  },
+                  "detalles_modificaciones": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id_pedido",
+                  "id_mesa",
+                  "hora_pedido",
+                  "estado_pedido"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Obtener_contenido_de_archivo": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "bb184e4d-3395-4901-aa8f-905bfa404a0a"
+          }
+        },
+        "Aplicar_a_cada_uno": {
+          "type": "Foreach",
+          "foreach": "@body('Análisis_del_archivo_JSON')",
+          "actions": {
+            "Crear_elemento": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://educa2madrid.sharepoint.com/sites/MyERest",
+                  "table": "dd1f0c14-4e58-4ac9-a7c3-42f5f90c282e",
+                  "item/Title": "@items('Aplicar_a_cada_uno')?['id_pedido']",
+                  "item/Mesa": "@items('Aplicar_a_cada_uno')?['id_mesa']",
+                  "item/Hora": "@items('Aplicar_a_cada_uno')?['hora_pedido']",
+                  "item/Plato": "@items('Aplicar_a_cada_uno')?['nombre_plato']",
+                  "item/Modificaciones": "@items('Aplicar_a_cada_uno')?['detalles_modificaciones']",
+                  "item/Estado/Value": "Pendiente"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "PostItem",
+                  "connectionName": "shared_sharepointonline"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "2ff577df-b16c-489c-b4b2-7c8094bfd04b"
+              }
+            }
+          },
+          "runAfter": {
+            "Análisis_del_archivo_JSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "1e1f48c3-de5d-4bda-9eda-ab5436e2ade5"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
