@@ -1,0 +1,122 @@
+[
+  {
+    "id_pedido": 134,
+    "id_mesa": 3,
+    "hora_pedido": "18:26:24",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Primeros",
+    "nombre_plato": "Pimientos Rellenos de Carne",
+    "modificaciones": "Sí",
+    "detalles_modificaciones": "Extra Queso"
+  },
+  {
+    "id_pedido": 134,
+    "id_mesa": 3,
+    "hora_pedido": "18:26:24",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Segundos",
+    "nombre_plato": "Pabellón Venezolano",
+    "modificaciones": "Sí",
+    "detalles_modificaciones": "Extra Caraotas"
+  },
+  {
+    "id_pedido": 134,
+    "id_mesa": 3,
+    "hora_pedido": "18:26:24",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Postres",
+    "nombre_plato": "Quesillo Venezolano",
+    "modificaciones": "No",
+    "detalles_modificaciones": " "
+  },
+  {
+    "id_pedido": 134,
+    "id_mesa": 3,
+    "hora_pedido": "18:26:24",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Bebidas",
+    "nombre_plato": "Cerveza Polar",
+    "modificaciones": "Sí",
+    "detalles_modificaciones": "Sin Vaso"
+  },
+  {
+    "id_pedido": 135,
+    "id_mesa": 3,
+    "hora_pedido": "18:28:14",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Primeros",
+    "nombre_plato": "Patatas Bravas Mixtas",
+    "modificaciones": "No",
+    "detalles_modificaciones": " "
+  },
+  {
+    "id_pedido": 135,
+    "id_mesa": 3,
+    "hora_pedido": "18:28:14",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Primeros",
+    "nombre_plato": "Patatas Bravas Mixtas",
+    "modificaciones": "No",
+    "detalles_modificaciones": " "
+  },
+  {
+    "id_pedido": 136,
+    "id_mesa": 3,
+    "hora_pedido": "18:29:32",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Segundos",
+    "nombre_plato": "Estofado de Ternera",
+    "modificaciones": "No",
+    "detalles_modificaciones": " "
+  },
+  {
+    "id_pedido": 137,
+    "id_mesa": 3,
+    "hora_pedido": "18:30:58",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Postres",
+    "nombre_plato": "Tarta de Santiago",
+    "modificaciones": "No",
+    "detalles_modificaciones": " "
+  },
+  {
+    "id_pedido": 138,
+    "id_mesa": 4,
+    "hora_pedido": "18:32:13",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Primeros",
+    "nombre_plato": "Patatas Bravas Mixtas",
+    "modificaciones": "No",
+    "detalles_modificaciones": " "
+  },
+  {
+    "id_pedido": 138,
+    "id_mesa": 4,
+    "hora_pedido": "18:32:13",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Segundos",
+    "nombre_plato": "Estofado de Ternera",
+    "modificaciones": "Sí",
+    "detalles_modificaciones": "Extra Patatas"
+  },
+  {
+    "id_pedido": 138,
+    "id_mesa": 4,
+    "hora_pedido": "18:32:13",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Postres",
+    "nombre_plato": "Tarta de Santiago",
+    "modificaciones": "No",
+    "detalles_modificaciones": " "
+  },
+  {
+    "id_pedido": 138,
+    "id_mesa": 4,
+    "hora_pedido": "18:32:13",
+    "estado_pedido": "Pendiente",
+    "tipo_plato": "Bebidas",
+    "nombre_plato": "Sangria",
+    "modificaciones": "Sí",
+    "detalles_modificaciones": "Extra Canela"
+  }
+]
