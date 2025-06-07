@@ -1,7 +1,10 @@
 # My E-Rest
 
-Este proyecto permite realizar pedidos desde una interfaz web, conectada a un servidor Node.js con base de datos SQLite. Los pedidos se guardan y luego se exportan automáticamente a un fichero `.json` sincronizado con OneDrive, para ser utilizados por la cocina
+Este proyecto permite realizar pedidos desde una interfaz web, conectada a un servidor Node.js con base de datos SQLite. Los pedidos se guardan y luego se exportan automáticamente a un fichero `.json` sincronizado con OneDrive, para ser utilizados por la cocina.
+
 ## ⚙️ Requisitos previos
+
+Para poder utilizar parte de la aplicación web, se necesitan realizar varios pasos previos
 
 - Tener instalado:
   - **Node.js** (versión 16 o superior recomendada)
@@ -12,21 +15,6 @@ Este proyecto permite realizar pedidos desde una interfaz web, conectada a un se
   node --version
   npm --version
 
-## 🚀 Pasos para ejecutar el proyecto
-
-1. Abre la consola y accede al directorio del backend:
-   
-   cd /ruta/a/tu/proyecto/Backend
-
-2. Instala las dependencias:
-   npm install
-
-3. Inicia el servidor:
-   node server.js
-
-   El servidor se iniciará en: [http://localhost:3000]
-
-4. Abre el fichero `Cliente/index.html` en el navegador para usar la interfaz de cliente.
 
 ## 🗃️ Base de datos
 
@@ -42,19 +30,37 @@ Cada vez que se realiza un pedido, se actualiza automáticamente el fichero:
 
 ``` comandas.json ```
 
-Este fichero contiene **todos los pedidos/comandas**, y se guarda directamente en:
+Que se ubica en un Sharepoint (OneDrive), el cual está conectado la cocina.
 
-``` C:/ruta/al/fichero/en/OneDrive ```
+Debido a que para acceder a la interfaz de cocina, se necesita un acceso explícito, permisos y una cuenta de la Comunidad de Madrid o Microsoft 365,
+
+Se ha optado por **crear un fichero de pruebas** llamado ``comandasDePruebas.json``. Ubicado dentro del directorio de Backend.
+Una vez realizado el pedido, las comandas se reflejarán de manera automática ahí, y se podrá comprobar el funcionamiento del programa.
 
 
-El JSON se sincroniza en tiempo real con OneDrive para que otros sistemas (como la interfaz de cocina) puedan acceder a los pedidos sin tocar la base de datos.
+## 🚀 Pasos para ejecutar el proyecto
 
+1. Abre la consola y accede al directorio del backend:
+   
+   cd /ruta/a/tu/proyecto/Backend
 
-**De momento para realizar la comprobación del flujo de datos entre el Backend y la Cocina, utilizaremos el fichero JSON que está dentro del directorio Cocina**
+2. Instala las dependencias ejecutando:
+   npm install
+
+3. Inicia el servidor ejecutando:
+   node server.js
+
+   **Si todo ha ido bien, la consola lanzará el siguiente mensaje: `Servidor iniciado en http://localhost:3000`**
+
+4. Abre el fichero `Cliente/index.html` en el navegador para usar la interfaz de cliente.
+
+5. Realiza un pedido.
+
+6. Comprueba en el fichero `comandasDePruebas.json` que se ha concretado el pedido, revisando la hora, la mesa, los platos y el número de comanda.
 
 ## 🧪 Prueba rápida
 
 1. En la web del cliente, selecciona una mesa y añade platos al carrito
 2. Personaliza un plato
 3. Finaliza el pedido
-4. Verifica que el fichero `cocina.json` se actualizó con el nuevo pedido
+4. Verifica que el fichero `comandasDePruebas.json` se actualizó con el nuevo pedido.
