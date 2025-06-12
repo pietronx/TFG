@@ -1,10 +1,15 @@
-// Librerías que importamos
-const express = require('express'); // express = framework para crear servidores   
-const cors = require('cors'); // cors = middleware para habilitar CORS
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./database/database.db');
+//------------------------> Librerías que importamos <------------------------\\
 
-const { exportarPedidosPendientesJSON } = require('./utils/exportJSON'); // Importamos la función para exportar a JSON
+// express = framework para crear servidores   
+const express = require('express'); 
+// cors = middleware para habilitar CORS
+const cors = require('cors'); 
+// sqlite3 = librería para interactuar con bases de datos SQLite
+const sqlite3 = require('sqlite3').verbose(); 
+// Creamos una conexión a la base de datos SQLite
+const db = new sqlite3.Database('./database/database.db'); 
+// Importamos la función para exportar a JSON
+const { exportarPedidosPendientesJSON } = require('./utils/exportJSON'); 
 
 // Definimos la 'app' y el puerto
 const app = express();
@@ -15,12 +20,14 @@ app.use(cors());
 // Middleware para parsear el cuerpo de las peticiones
 app.use(express.json());
 
-// Iniciar el servidor
+// Iniciar el servidor en el puerto especificado (3000)
 app.listen(PORT, () => {
     console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });
 
 // Obtener el nombre y el id de los platos de la base de datos
+// Para que el cliente pueda ver los platos disponibles
+// Y poder hacer un pedido
 app.get('/platos', (req, res) => {
     db.all(`SELECT id_plato, nombre_plato FROM Platos`, [], (err, rows) => {
         if (err) {
@@ -32,7 +39,7 @@ app.get('/platos', (req, res) => {
     });
 });
 
-// Recibir el pedido del cliente y guardarlo en la base de datos
+// Recibimos el pedido del cliente y lo guardamos en la base de datos
 app.post('/pedidos', (req, res) => {
     const pedido = req.body;
     const { id_mesa, hora_pedido, estado_pedido, platosPedido } = pedido;
@@ -79,7 +86,7 @@ app.post('/pedidos', (req, res) => {
                     );
                 });
 
-                // Finalizar la declaración preparada
+                // Finalizamos el statement
                 stmt.finalize(err => {
                     if (err) {
                         console.error("Error al finalizar stmt:", err.message);

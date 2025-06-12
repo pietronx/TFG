@@ -1,6 +1,6 @@
 // Exporta los pedidos pendientes a un archivo JSON
 const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3').verbose(); 
 const path = require('path');
 
 // Ruta del OneDrive donde se guardará el archivo JSON
@@ -8,6 +8,9 @@ const rutaJSON = path.resolve('C:/Users/peter/OneDrive - Consejería de Educaci�
 
 // Enlace de la ruta anterior (solo pueden acceder los usuarios de la Comunidad de Madrid):
 // https://educa2madrid.sharepoint.com/:u:/s/MyERest/EQ37riF9gBhBrnyH7chyjBABqrOwhBICPvms3NB6uWQxTw?e=3yBgnW
+
+// Ruta local para pruebas (comentar si se tiene acceso al OneDrive)
+//const rutaJSON = path.resolve('./comandasDePruebas.json');
 
 function exportarPedidosPendientesJSON() {
   const db = new sqlite3.Database('./database/database.db');
